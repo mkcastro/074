@@ -1,10 +1,11 @@
 import Image from "next/image";
-import { Phone, Wallet } from "lucide-react";
+import { Phone, Wallet, Wind } from "lucide-react";
 
 const disposableProducts = [
   {
     name: "Spark Basic X 20K Puffs",
     price: 600,
+    gradient: "from-orange-500 to-yellow-500",
     flavors: [
       "Watermelon",
       "Strawberry",
@@ -21,6 +22,7 @@ const disposableProducts = [
   {
     name: "VI Bar 30K Puffs",
     price: 600,
+    gradient: "from-violet-500 to-purple-600",
     flavors: [
       "Red Blast (Watermelon Ice)",
       "Double Yellow (Double Mango)",
@@ -45,11 +47,13 @@ const disposableProducts = [
   {
     name: "Storm Dispo 15K Puffs",
     price: 550,
+    gradient: "from-slate-600 to-blue-700",
     flavors: ["Watermelon", "Strawberry Ice Cream", "Blueberry"],
   },
   {
     name: "Chillx Kleer 15K Puffs",
     price: 550,
+    gradient: "from-cyan-400 to-teal-500",
     flavors: [
       "Watermelon Strawberry",
       "Watermelon Ice",
@@ -60,6 +64,7 @@ const disposableProducts = [
   {
     name: "Poca Juliette 15K Puffs",
     price: 550,
+    gradient: "from-pink-400 to-rose-500",
     flavors: [
       "Red Shirota (Strawberry Yakult)",
       "Purple Haze (Taro Ice Cream)",
@@ -69,6 +74,7 @@ const disposableProducts = [
   {
     name: "Chillax Vista 15K Puffs",
     price: 550,
+    gradient: "from-lime-400 to-green-500",
     flavors: ["Sea Salt Lemon"],
   },
 ];
@@ -77,6 +83,7 @@ const prefilledProducts = [
   {
     name: "Xblack Elite V2 Pods",
     price: 400,
+    gradient: "from-gray-800 to-gray-900",
     flavors: [
       "Fresh Menthol (Mint)",
       "Very Baguio (Strawberry)",
@@ -88,6 +95,7 @@ const prefilledProducts = [
   {
     name: "Blaze V2 15K Puffs (Compatible)",
     price: 400,
+    gradient: "from-red-500 to-orange-600",
     flavors: [
       "Watermelon",
       "Strawberry Ice Cream",
@@ -107,6 +115,7 @@ const juiceProducts = [
   {
     name: "Fire Pod Formula 30ML 3MG",
     price: 400,
+    gradient: "from-amber-500 to-red-600",
     flavors: [
       "Eternal Flame (Strawberry Grape)",
       "Sizzling Spark (Strawberry Watermelon)",
@@ -119,25 +128,32 @@ const juiceProducts = [
 function ProductCard({
   product,
 }: {
-  product: { name: string; price: number; flavors: string[] };
+  product: { name: string; price: number; flavors: string[]; gradient: string };
 }) {
   return (
-    <div className="bg-card border border-border rounded-xl p-6 hover:border-primary/50 transition-colors">
-      <div className="flex justify-between items-start mb-4">
-        <h3 className="text-lg font-semibold text-foreground">{product.name}</h3>
-        <span className="text-xl font-bold text-primary whitespace-nowrap ml-4">
+    <div className="bg-card border border-border rounded-xl overflow-hidden hover:border-primary/50 transition-colors">
+      <div className={`bg-gradient-to-r ${product.gradient} p-4 flex justify-between items-center`}>
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+            <Wind className="w-5 h-5 text-white" />
+          </div>
+          <h3 className="text-lg font-semibold text-white">{product.name}</h3>
+        </div>
+        <span className="text-xl font-bold text-white bg-black/20 px-3 py-1 rounded-lg">
           P{product.price}
         </span>
       </div>
-      <div className="flex flex-wrap gap-2">
-        {product.flavors.map((flavor) => (
-          <span
-            key={flavor}
-            className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm"
-          >
-            {flavor}
-          </span>
-        ))}
+      <div className="p-4">
+        <div className="flex flex-wrap gap-2">
+          {[...product.flavors].sort((a, b) => a.localeCompare(b)).map((flavor) => (
+            <span
+              key={flavor}
+              className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm"
+            >
+              {flavor}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
