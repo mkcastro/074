@@ -170,7 +170,10 @@ export default function Page() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-          <span className="text-xl font-bold text-foreground">074</span>
+          <div className="flex flex-col items-center leading-tight">
+            <span className="text-xl font-bold text-foreground">074</span>
+            <span className="text-[10px] tracking-widest text-muted-foreground">VAPE • SHOP</span>
+          </div>
           <div className="flex gap-6 text-sm">
             <a href="#disposable" className="text-muted-foreground hover:text-foreground transition-colors">
               Disposable
